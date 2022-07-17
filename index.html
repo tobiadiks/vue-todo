@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Vue.js</title>
+
+  <!-- Vue.js -->
+  <script src="res/vue@2.6.12.js"></script>
+
+</head>
+
+<body>
+  <div style="padding: 0.5rem;" id="vue-app">
+    <h3>Todo App | 🔆{{todos.length}}</h3>
+    <div>
+      <input placeholder="type todo here" style="padding: 0.5rem" v-model="msg" /><button @click="create" style="padding: 0.5rem; background-color: black; color: white;">Create</button>
+    </div>
+    <div v-if="todos.length" style="font-size:0.25rem; margin:0.25rem 0rem;">double tap todo item to change status</div>
+    <template>
+      <ul v-for='todo in todos'>
+        <li @dblclick="status(todo.id)" v-if="todos && !todo.isCompleted" style="display: flex; justify-content: space-between;">
+          <div style="font-weight: bold;">{{todo.msg}}</div>
+          <div style="color: blue;" @click="edit(todo.id)">edit</div>
+          <div style="color: red;" @click="remove(todo.id)">delete</div>
+        </li>
+        <li @dblclick="status(todo.id)" v-if="todos && todo.isCompleted" style="display: flex; justify-content: space-between;">
+          <div style="font-weight: bold;color:gray; text-decoration: line-through;">{{todo.msg}}</div>
+          <div style="color: blue;"  @click="edit(todo.id)">edit</div>
+          <div style="color: red;" @click="remove(todo.id)">delete</div>
+        </li>
+      </ul>
+      <p v-if="todos.length==0">No todo item</p>
+      
+    </template>
+  </div>
+  <!-- Project -->
+  <script src="app.js"></script>
+</body>
+
+</html>
